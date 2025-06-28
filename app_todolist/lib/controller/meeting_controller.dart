@@ -67,30 +67,40 @@ class MeetingController {
 
   Future<void> addMeeting(Map<String, dynamic> meeting) async {
     String warna = getStringFromColor(meeting['background']);
-    await dio.post('http://10.0.2.2:8000/api/tasks', data: {
-      'judul_tugas': meeting['eventName'],
-      'tanggal_mulai': meeting['from'].toString(),
-      'tanggal_selesai': meeting ['to'].toString(),
-      'warna': warna,
-      'mata_kuliah': meeting ['mataKuliah'],
-      'jenis_tugas': meeting ['jenisTugas'],
-      'deskripsi_tugas': meeting ['deskripsiTugas'],
-      'pengingat': meeting ['pengingat'],
-    });
+    await dio.post(
+      'http://10.0.2.2:8000/api/tasks',
+      data: {
+        'judul_tugas': meeting['eventName'],
+        'tanggal_mulai': meeting['from'].toString(),
+        'tanggal_selesai': meeting['to'].toString(),
+        'warna': warna,
+        'mata_kuliah': meeting['mataKuliah'],
+        'jenis_tugas': meeting['jenisTugas'],
+        'deskripsi_tugas': meeting['deskripsiTugas'],
+        'pengingat': meeting['pengingat'],
+      },
+    );
   }
 
+  Future<void> editMeeting(int id, Map<String, dynamic> meeting) async {
+    print(meeting);
 
-   Future<void> editMeeting(int id, Map<String, dynamic>data) async {
-    String warna = getStringFromColor(data['background']);
-    await dio.put('http://10.0.2.2:8000/api/tasks/${data['id']}',data: {
-      'judul_tugas': data['eventName'],
-      'tanggal_mulai': data['from'].toString(),
-      'tanggal_selesai': data['to'].toString(),
-      'warna': warna,
-      'mata_kuliah': data['mataKuliah'],
-      'jenis_tugas': data['jenisTugas'],
-      'deskripsi_tugas': data['deskripsiTugas'],
-      'pengingat': data['pengingat'],
-    });
+    await dio.put(
+      'http://10.0.2.2:8000/api/tasks/$id',
+      data: {
+        'judul_tugas': meeting['judul_tugas'],
+        'tanggal_mulai': meeting['tanggal_mulai'].toString(),
+        'tanggal_selesai': meeting['tanggal_selesai'].toString(),
+        'warna': meeting['warna'],
+        'mata_kuliah': meeting['mataKuliah'],
+        'jenis_tugas': meeting['jenis_tugas'],
+        'deskripsi_tugas': meeting['deskripsi_tugas'],
+        'pengingat': meeting['pengingat'],
+      },
+    );
+  }
+
+  Future<void> deleteMeeting(int id) async {
+    await dio.delete('http://10.0.2.2:8000/api/tasks/$id');
   }
 }

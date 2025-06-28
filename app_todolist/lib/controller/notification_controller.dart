@@ -75,8 +75,8 @@ class NotificationController {
       scheduledTime.year,
       scheduledTime.month,
       scheduledTime.day,
-      5,
-      0, // Set the time to 05:00 AM
+      3,
+      00, // Set the time to 05:00 AM
     );
 
     await notificationPlugin.zonedSchedule(
@@ -88,5 +88,12 @@ class NotificationController {
       getNotificationDetails(),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
     );
+  }
+  Future<void> cancelNotification(int id) async {
+    if (!_isInitialized) {
+      await initialize();
+    }
+
+    await notificationPlugin.cancel(id);
   }
 }

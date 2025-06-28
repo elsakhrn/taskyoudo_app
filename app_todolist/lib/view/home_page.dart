@@ -21,7 +21,10 @@ class HomePage extends StatelessWidget {
         List<Meeting> meetingList = [];
         if (snapshot.hasData) {
           meetingList = snapshot.data!;
-          context.read<CalendarProvider>().ubahmeetingList(meetingList);
+          Future.delayed(Duration(seconds: 1), () {
+            if (!context.mounted) return;
+            context.read<CalendarProvider>().ubahmeetingList(meetingList);
+          });
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
@@ -83,12 +86,13 @@ class HomePage extends StatelessWidget {
                   headerHeight: 0,
                   onViewChanged: (_) {
                     String tahun = DateFormat(
-                      'yyyy',
+                      'yyyy', 'id_ID',
                     ).format(calendarController.displayDate!);
                     String bulan = DateFormat(
-                      'MMMM',
+                      'MMMM', 'id_ID',
                     ).format(calendarController.displayDate!);
                     Future.delayed(Duration(seconds: 1), () {
+                      if (!context.mounted) return;
                       context.read<CalendarProvider>().ubahbT([bulan, tahun]);
                     });
                   },
@@ -124,7 +128,7 @@ class HomePage extends StatelessWidget {
                                         child: Column(
                                           children: [
                                             Text(DateFormat(
-                                              'EEEE, dd MMMM yyyy',
+                                              'EEEE, dd MMMM yyyy', 'id_ID',
                                             ).format(calendarTapDetails.date!),),
                                             Expanded(
                                               child: ListView.builder(

@@ -3,6 +3,7 @@ import 'package:app_todolist/providers/calendar_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'view/home_page.dart';
 
@@ -14,9 +15,6 @@ void main() async {
   FlutterLocalNotificationsPlugin().resolvePlatformSpecificImplementation<
     AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
   
-
-
-
   runApp(
     MultiProvider(
       providers: [
@@ -35,6 +33,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Apps ToDo',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('id', 'ID'), // Indonesian
+        const Locale('en', 'US'), // English
+      ],
       home: HomePage(),
     );
   }

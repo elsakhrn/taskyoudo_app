@@ -41,6 +41,7 @@ dependencies:
   dio: ^5.8.0+1
   flutter_local_notifications: ^19.2.1
   flutter_timezone: ^4.1.1
+  flutter_localization: ^0.3.3
 
 dev_dependencies:
   flutter_test:

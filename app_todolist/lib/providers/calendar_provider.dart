@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:app_todolist/model/meeting.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -16,10 +14,6 @@ class CalendarProvider with ChangeNotifier {
   List<Meeting> get meetingList => _meetingList;
   void ubahmeetingList(List<Meeting> meetingListBaru){
     _meetingList = meetingListBaru;
-    notifyListeners();
-  }
-  void tambahMeeting(Meeting meetingBaru){
-    _meetingList.add(meetingBaru);
     notifyListeners();
   }
 }
